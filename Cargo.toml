@@ -1,0 +1,12 @@
+[package]
+name = "zinctx"
+version = "0.1.0"
+authors = ["motxx <5776910+motxx@users.noreply.github.com>"]
+edition = "2018"
+
+[dependencies]
+protobuf = "~2.0"
+zksync = { git = "https://github.com/motxx/zksync", branch = "update-metrics" }
+
+[build-dependencies]
+protoc-rust = "2.0"

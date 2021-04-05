@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+message Value {
+  oneof ValueOneOf {
+    int32 intval = 1;
+    string stringval = 2;
+  }
+}
+
+message SendQuery {
+  string address = 1;
+  string method = 2;
+  map<string, Value> arguments = 3;
+}
+
+message SendCall {
+  string address = 1;
+  string method = 2;
+  map<string, Value> arguments = 3;
+}
