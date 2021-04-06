@@ -1,13 +1,22 @@
 mod protos;
+mod query;
 
+extern crate libc;
 extern crate protobuf;
 
+use std::ffi::{CStr, CString};
 use protobuf::Message;
-use protos::zinctx::SendQuery;
-use zksync::Network;
+use protos::zinctx::QueryRequest;
 
-pub fn send_query(sq: SendQuery) -> std::string::String {
-    format!("address: {}, network: {}", sq.address, Network::Rinkeby)
+#[no_mangle]
+pub extern "C" fn ffi_send_query_request(ptr: *const libc::c_char) -> *const libc::c_char {
+    let slice = unsafe { CStr::from_ptr(ptr) };
+    let proto = QueryRequest::parse_from_bytes(slice.to_bytes()).unwrap();
+    let res = query::send_request(proto);
+    let s = CString::new(res.write_to_bytes().unwrap()).unwrap();
+    let p = s.as_ptr();
+    std::mem::forget(s);
+    p
 }
 
 #[cfg(test)]
@@ -16,9 +25,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let mut sq = SendQuery::new();
+        let mut sq = QueryRequest::new();
         sq.set_address("1234567890abcdef".to_string());
-        let test = send_query(sq);
-        assert_eq!(test, "address: 1234567890abcdef, network: rinkeby");
     }
 }

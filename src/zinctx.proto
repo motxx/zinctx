@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "protos/";
+
 message Value {
   oneof ValueOneOf {
     int32 intval = 1;
@@ -7,14 +9,22 @@ message Value {
   }
 }
 
-message SendQuery {
+message QueryRequest {
   string address = 1;
   string method = 2;
   map<string, Value> arguments = 3;
 }
 
-message SendCall {
+message QueryResponse {
+  Value output = 1;
+}
+
+message CallRequest {
   string address = 1;
   string method = 2;
   map<string, Value> arguments = 3;
+}
+
+message CallResponse {
+  Value output = 1;
 }
