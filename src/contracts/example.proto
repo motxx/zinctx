@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package contracts.example;
+
+import "zinc.proto";
+
+option go_package = "protos/contracts/";
+
+message GetFeeArguments {
+}
+
+message GetFeeOutput {
+  zinc.uint16 fee = 1;
+}
+
+message DepositArguments {
+}
+
+message DepositOutput {
+}
+
+message ExchangeArguments {
+  zinc.address withdraw_token = 1;
+}
+
+message ExchangeOutput {
+}

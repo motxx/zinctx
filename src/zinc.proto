@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package zinc;
+
+option go_package = "protos/";
+
+message address { bytes data = 1; }
+message uint8   { bytes data = 1; }
+message uint16  { bytes data = 1; }
+message uint248 { bytes data = 1; }
+
+message Message {
+  address sender = 1;
+  address recipient = 2;
+  address token_address = 3;
+  uint248 amount = 4;
+}

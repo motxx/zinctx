@@ -17,115 +17,112 @@
 #![allow(trivial_casts)]
 #![allow(unused_imports)]
 #![allow(unused_results)]
-//! Generated file from `src/zinctx.proto`
+//! Generated file from `zinctx.proto`
 
 /// Generated files are compatible only with the same version
 /// of protobuf runtime.
 // const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_2_22_1;
 
 #[derive(PartialEq,Clone,Default)]
-pub struct Value {
-    // message oneof groups
-    pub ValueOneOf: ::std::option::Option<Value_oneof_ValueOneOf>,
+pub struct Input {
+    // message fields
+    pub msg: ::protobuf::SingularPtrField<super::zinc::Message>,
+    pub arguments: ::protobuf::SingularPtrField<::protobuf::well_known_types::Any>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
 }
 
-impl<'a> ::std::default::Default for &'a Value {
-    fn default() -> &'a Value {
-        <Value as ::protobuf::Message>::default_instance()
+impl<'a> ::std::default::Default for &'a Input {
+    fn default() -> &'a Input {
+        <Input as ::protobuf::Message>::default_instance()
     }
 }
 
-#[derive(Clone,PartialEq,Debug)]
-pub enum Value_oneof_ValueOneOf {
-    intval(i32),
-    stringval(::std::string::String),
-}
-
-impl Value {
-    pub fn new() -> Value {
+impl Input {
+    pub fn new() -> Input {
         ::std::default::Default::default()
     }
 
-    // int32 intval = 1;
+    // .zinc.Message msg = 1;
 
 
-    pub fn get_intval(&self) -> i32 {
-        match self.ValueOneOf {
-            ::std::option::Option::Some(Value_oneof_ValueOneOf::intval(v)) => v,
-            _ => 0,
-        }
+    pub fn get_msg(&self) -> &super::zinc::Message {
+        self.msg.as_ref().unwrap_or_else(|| <super::zinc::Message as ::protobuf::Message>::default_instance())
     }
-    pub fn clear_intval(&mut self) {
-        self.ValueOneOf = ::std::option::Option::None;
+    pub fn clear_msg(&mut self) {
+        self.msg.clear();
     }
 
-    pub fn has_intval(&self) -> bool {
-        match self.ValueOneOf {
-            ::std::option::Option::Some(Value_oneof_ValueOneOf::intval(..)) => true,
-            _ => false,
-        }
+    pub fn has_msg(&self) -> bool {
+        self.msg.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_intval(&mut self, v: i32) {
-        self.ValueOneOf = ::std::option::Option::Some(Value_oneof_ValueOneOf::intval(v))
-    }
-
-    // string stringval = 2;
-
-
-    pub fn get_stringval(&self) -> &str {
-        match self.ValueOneOf {
-            ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(ref v)) => v,
-            _ => "",
-        }
-    }
-    pub fn clear_stringval(&mut self) {
-        self.ValueOneOf = ::std::option::Option::None;
-    }
-
-    pub fn has_stringval(&self) -> bool {
-        match self.ValueOneOf {
-            ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(..)) => true,
-            _ => false,
-        }
-    }
-
-    // Param is passed by value, moved
-    pub fn set_stringval(&mut self, v: ::std::string::String) {
-        self.ValueOneOf = ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(v))
+    pub fn set_msg(&mut self, v: super::zinc::Message) {
+        self.msg = ::protobuf::SingularPtrField::some(v);
     }
 
     // Mutable pointer to the field.
-    pub fn mut_stringval(&mut self) -> &mut ::std::string::String {
-        if let ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(_)) = self.ValueOneOf {
-        } else {
-            self.ValueOneOf = ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(::std::string::String::new()));
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_msg(&mut self) -> &mut super::zinc::Message {
+        if self.msg.is_none() {
+            self.msg.set_default();
         }
-        match self.ValueOneOf {
-            ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(ref mut v)) => v,
-            _ => panic!(),
-        }
+        self.msg.as_mut().unwrap()
     }
 
     // Take field
-    pub fn take_stringval(&mut self) -> ::std::string::String {
-        if self.has_stringval() {
-            match self.ValueOneOf.take() {
-                ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(v)) => v,
-                _ => panic!(),
-            }
-        } else {
-            ::std::string::String::new()
+    pub fn take_msg(&mut self) -> super::zinc::Message {
+        self.msg.take().unwrap_or_else(|| super::zinc::Message::new())
+    }
+
+    // .google.protobuf.Any arguments = 2;
+
+
+    pub fn get_arguments(&self) -> &::protobuf::well_known_types::Any {
+        self.arguments.as_ref().unwrap_or_else(|| <::protobuf::well_known_types::Any as ::protobuf::Message>::default_instance())
+    }
+    pub fn clear_arguments(&mut self) {
+        self.arguments.clear();
+    }
+
+    pub fn has_arguments(&self) -> bool {
+        self.arguments.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_arguments(&mut self, v: ::protobuf::well_known_types::Any) {
+        self.arguments = ::protobuf::SingularPtrField::some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_arguments(&mut self) -> &mut ::protobuf::well_known_types::Any {
+        if self.arguments.is_none() {
+            self.arguments.set_default();
         }
+        self.arguments.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_arguments(&mut self) -> ::protobuf::well_known_types::Any {
+        self.arguments.take().unwrap_or_else(|| ::protobuf::well_known_types::Any::new())
     }
 }
 
-impl ::protobuf::Message for Value {
+impl ::protobuf::Message for Input {
     fn is_initialized(&self) -> bool {
+        for v in &self.msg {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        for v in &self.arguments {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
         true
     }
 
@@ -134,16 +131,10 @@ impl ::protobuf::Message for Value {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    self.ValueOneOf = ::std::option::Option::Some(Value_oneof_ValueOneOf::intval(is.read_int32()?));
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.msg)?;
                 },
                 2 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    self.ValueOneOf = ::std::option::Option::Some(Value_oneof_ValueOneOf::stringval(is.read_string()?));
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.arguments)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -157,15 +148,13 @@ impl ::protobuf::Message for Value {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if let ::std::option::Option::Some(ref v) = self.ValueOneOf {
-            match v {
-                &Value_oneof_ValueOneOf::intval(v) => {
-                    my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
-                },
-                &Value_oneof_ValueOneOf::stringval(ref v) => {
-                    my_size += ::protobuf::rt::string_size(2, &v);
-                },
-            };
+        if let Some(ref v) = self.msg.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
+        if let Some(ref v) = self.arguments.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -173,15 +162,15 @@ impl ::protobuf::Message for Value {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
-        if let ::std::option::Option::Some(ref v) = self.ValueOneOf {
-            match v {
-                &Value_oneof_ValueOneOf::intval(v) => {
-                    os.write_int32(1, v)?;
-                },
-                &Value_oneof_ValueOneOf::stringval(ref v) => {
-                    os.write_string(2, v)?;
-                },
-            };
+        if let Some(ref v) = self.msg.as_ref() {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
+        if let Some(ref v) = self.arguments.as_ref() {
+            os.write_tag(2, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -213,53 +202,53 @@ impl ::protobuf::Message for Value {
         Self::descriptor_static()
     }
 
-    fn new() -> Value {
-        Value::new()
+    fn new() -> Input {
+        Input::new()
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_i32_accessor::<_>(
-                "intval",
-                Value::has_intval,
-                Value::get_intval,
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::zinc::Message>>(
+                "msg",
+                |m: &Input| { &m.msg },
+                |m: &mut Input| { &mut m.msg },
             ));
-            fields.push(::protobuf::reflect::accessor::make_singular_string_accessor::<_>(
-                "stringval",
-                Value::has_stringval,
-                Value::get_stringval,
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<::protobuf::well_known_types::Any>>(
+                "arguments",
+                |m: &Input| { &m.arguments },
+                |m: &mut Input| { &mut m.arguments },
             ));
-            ::protobuf::reflect::MessageDescriptor::new_pb_name::<Value>(
-                "Value",
+            ::protobuf::reflect::MessageDescriptor::new_pb_name::<Input>(
+                "Input",
                 fields,
                 file_descriptor_proto()
             )
         })
     }
 
-    fn default_instance() -> &'static Value {
-        static instance: ::protobuf::rt::LazyV2<Value> = ::protobuf::rt::LazyV2::INIT;
-        instance.get(Value::new)
+    fn default_instance() -> &'static Input {
+        static instance: ::protobuf::rt::LazyV2<Input> = ::protobuf::rt::LazyV2::INIT;
+        instance.get(Input::new)
     }
 }
 
-impl ::protobuf::Clear for Value {
+impl ::protobuf::Clear for Input {
     fn clear(&mut self) {
-        self.ValueOneOf = ::std::option::Option::None;
-        self.ValueOneOf = ::std::option::Option::None;
+        self.msg.clear();
+        self.arguments.clear();
         self.unknown_fields.clear();
     }
 }
 
-impl ::std::fmt::Debug for Value {
+impl ::std::fmt::Debug for Input {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         ::protobuf::text_format::fmt(self, f)
     }
 }
 
-impl ::protobuf::reflect::ProtobufValue for Value {
+impl ::protobuf::reflect::ProtobufValue for Input {
     fn as_ref(&self) -> ::protobuf::reflect::ReflectValueRef {
         ::protobuf::reflect::ReflectValueRef::Message(self)
     }
@@ -270,7 +259,7 @@ pub struct QueryRequest {
     // message fields
     pub address: ::std::string::String,
     pub method: ::std::string::String,
-    pub arguments: ::std::collections::HashMap<::std::string::String, Value>,
+    pub input: ::protobuf::SingularPtrField<Input>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -339,34 +328,47 @@ impl QueryRequest {
         ::std::mem::replace(&mut self.method, ::std::string::String::new())
     }
 
-    // repeated .QueryRequest.ArgumentsEntry arguments = 3;
+    // .zinctx.Input input = 3;
 
 
-    pub fn get_arguments(&self) -> &::std::collections::HashMap<::std::string::String, Value> {
-        &self.arguments
+    pub fn get_input(&self) -> &Input {
+        self.input.as_ref().unwrap_or_else(|| <Input as ::protobuf::Message>::default_instance())
     }
-    pub fn clear_arguments(&mut self) {
-        self.arguments.clear();
+    pub fn clear_input(&mut self) {
+        self.input.clear();
+    }
+
+    pub fn has_input(&self) -> bool {
+        self.input.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_arguments(&mut self, v: ::std::collections::HashMap<::std::string::String, Value>) {
-        self.arguments = v;
+    pub fn set_input(&mut self, v: Input) {
+        self.input = ::protobuf::SingularPtrField::some(v);
     }
 
     // Mutable pointer to the field.
-    pub fn mut_arguments(&mut self) -> &mut ::std::collections::HashMap<::std::string::String, Value> {
-        &mut self.arguments
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_input(&mut self) -> &mut Input {
+        if self.input.is_none() {
+            self.input.set_default();
+        }
+        self.input.as_mut().unwrap()
     }
 
     // Take field
-    pub fn take_arguments(&mut self) -> ::std::collections::HashMap<::std::string::String, Value> {
-        ::std::mem::replace(&mut self.arguments, ::std::collections::HashMap::new())
+    pub fn take_input(&mut self) -> Input {
+        self.input.take().unwrap_or_else(|| Input::new())
     }
 }
 
 impl ::protobuf::Message for QueryRequest {
     fn is_initialized(&self) -> bool {
+        for v in &self.input {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
         true
     }
 
@@ -381,7 +383,7 @@ impl ::protobuf::Message for QueryRequest {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.method)?;
                 },
                 3 => {
-                    ::protobuf::rt::read_map_into::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(wire_type, is, &mut self.arguments)?;
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.input)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -401,7 +403,10 @@ impl ::protobuf::Message for QueryRequest {
         if !self.method.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.method);
         }
-        my_size += ::protobuf::rt::compute_map_size::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(3, &self.arguments);
+        if let Some(ref v) = self.input.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
@@ -414,7 +419,11 @@ impl ::protobuf::Message for QueryRequest {
         if !self.method.is_empty() {
             os.write_string(2, &self.method)?;
         }
-        ::protobuf::rt::write_map_with_cached_sizes::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(3, &self.arguments, os)?;
+        if let Some(ref v) = self.input.as_ref() {
+            os.write_tag(3, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -463,10 +472,10 @@ impl ::protobuf::Message for QueryRequest {
                 |m: &QueryRequest| { &m.method },
                 |m: &mut QueryRequest| { &mut m.method },
             ));
-            fields.push(::protobuf::reflect::accessor::make_map_accessor::<_, ::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(
-                "arguments",
-                |m: &QueryRequest| { &m.arguments },
-                |m: &mut QueryRequest| { &mut m.arguments },
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Input>>(
+                "input",
+                |m: &QueryRequest| { &m.input },
+                |m: &mut QueryRequest| { &mut m.input },
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<QueryRequest>(
                 "QueryRequest",
@@ -486,7 +495,7 @@ impl ::protobuf::Clear for QueryRequest {
     fn clear(&mut self) {
         self.address.clear();
         self.method.clear();
-        self.arguments.clear();
+        self.input.clear();
         self.unknown_fields.clear();
     }
 }
@@ -506,7 +515,7 @@ impl ::protobuf::reflect::ProtobufValue for QueryRequest {
 #[derive(PartialEq,Clone,Default)]
 pub struct QueryResponse {
     // message fields
-    pub output: ::protobuf::SingularPtrField<Value>,
+    pub output: ::protobuf::SingularPtrField<::protobuf::well_known_types::Any>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -523,11 +532,11 @@ impl QueryResponse {
         ::std::default::Default::default()
     }
 
-    // .Value output = 1;
+    // .google.protobuf.Any output = 1;
 
 
-    pub fn get_output(&self) -> &Value {
-        self.output.as_ref().unwrap_or_else(|| <Value as ::protobuf::Message>::default_instance())
+    pub fn get_output(&self) -> &::protobuf::well_known_types::Any {
+        self.output.as_ref().unwrap_or_else(|| <::protobuf::well_known_types::Any as ::protobuf::Message>::default_instance())
     }
     pub fn clear_output(&mut self) {
         self.output.clear();
@@ -538,13 +547,13 @@ impl QueryResponse {
     }
 
     // Param is passed by value, moved
-    pub fn set_output(&mut self, v: Value) {
+    pub fn set_output(&mut self, v: ::protobuf::well_known_types::Any) {
         self.output = ::protobuf::SingularPtrField::some(v);
     }
 
     // Mutable pointer to the field.
     // If field is not initialized, it is initialized with default value first.
-    pub fn mut_output(&mut self) -> &mut Value {
+    pub fn mut_output(&mut self) -> &mut ::protobuf::well_known_types::Any {
         if self.output.is_none() {
             self.output.set_default();
         }
@@ -552,8 +561,8 @@ impl QueryResponse {
     }
 
     // Take field
-    pub fn take_output(&mut self) -> Value {
-        self.output.take().unwrap_or_else(|| Value::new())
+    pub fn take_output(&mut self) -> ::protobuf::well_known_types::Any {
+        self.output.take().unwrap_or_else(|| ::protobuf::well_known_types::Any::new())
     }
 }
 
@@ -639,7 +648,7 @@ impl ::protobuf::Message for QueryResponse {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Value>>(
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<::protobuf::well_known_types::Any>>(
                 "output",
                 |m: &QueryResponse| { &m.output },
                 |m: &mut QueryResponse| { &mut m.output },
@@ -682,7 +691,7 @@ pub struct CallRequest {
     // message fields
     pub address: ::std::string::String,
     pub method: ::std::string::String,
-    pub arguments: ::std::collections::HashMap<::std::string::String, Value>,
+    pub input: ::protobuf::SingularPtrField<Input>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -751,34 +760,47 @@ impl CallRequest {
         ::std::mem::replace(&mut self.method, ::std::string::String::new())
     }
 
-    // repeated .CallRequest.ArgumentsEntry arguments = 3;
+    // .zinctx.Input input = 3;
 
 
-    pub fn get_arguments(&self) -> &::std::collections::HashMap<::std::string::String, Value> {
-        &self.arguments
+    pub fn get_input(&self) -> &Input {
+        self.input.as_ref().unwrap_or_else(|| <Input as ::protobuf::Message>::default_instance())
     }
-    pub fn clear_arguments(&mut self) {
-        self.arguments.clear();
+    pub fn clear_input(&mut self) {
+        self.input.clear();
+    }
+
+    pub fn has_input(&self) -> bool {
+        self.input.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_arguments(&mut self, v: ::std::collections::HashMap<::std::string::String, Value>) {
-        self.arguments = v;
+    pub fn set_input(&mut self, v: Input) {
+        self.input = ::protobuf::SingularPtrField::some(v);
     }
 
     // Mutable pointer to the field.
-    pub fn mut_arguments(&mut self) -> &mut ::std::collections::HashMap<::std::string::String, Value> {
-        &mut self.arguments
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_input(&mut self) -> &mut Input {
+        if self.input.is_none() {
+            self.input.set_default();
+        }
+        self.input.as_mut().unwrap()
     }
 
     // Take field
-    pub fn take_arguments(&mut self) -> ::std::collections::HashMap<::std::string::String, Value> {
-        ::std::mem::replace(&mut self.arguments, ::std::collections::HashMap::new())
+    pub fn take_input(&mut self) -> Input {
+        self.input.take().unwrap_or_else(|| Input::new())
     }
 }
 
 impl ::protobuf::Message for CallRequest {
     fn is_initialized(&self) -> bool {
+        for v in &self.input {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
         true
     }
 
@@ -793,7 +815,7 @@ impl ::protobuf::Message for CallRequest {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.method)?;
                 },
                 3 => {
-                    ::protobuf::rt::read_map_into::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(wire_type, is, &mut self.arguments)?;
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.input)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -813,7 +835,10 @@ impl ::protobuf::Message for CallRequest {
         if !self.method.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.method);
         }
-        my_size += ::protobuf::rt::compute_map_size::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(3, &self.arguments);
+        if let Some(ref v) = self.input.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
@@ -826,7 +851,11 @@ impl ::protobuf::Message for CallRequest {
         if !self.method.is_empty() {
             os.write_string(2, &self.method)?;
         }
-        ::protobuf::rt::write_map_with_cached_sizes::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(3, &self.arguments, os)?;
+        if let Some(ref v) = self.input.as_ref() {
+            os.write_tag(3, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -875,10 +904,10 @@ impl ::protobuf::Message for CallRequest {
                 |m: &CallRequest| { &m.method },
                 |m: &mut CallRequest| { &mut m.method },
             ));
-            fields.push(::protobuf::reflect::accessor::make_map_accessor::<_, ::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Value>>(
-                "arguments",
-                |m: &CallRequest| { &m.arguments },
-                |m: &mut CallRequest| { &mut m.arguments },
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Input>>(
+                "input",
+                |m: &CallRequest| { &m.input },
+                |m: &mut CallRequest| { &mut m.input },
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<CallRequest>(
                 "CallRequest",
@@ -898,7 +927,7 @@ impl ::protobuf::Clear for CallRequest {
     fn clear(&mut self) {
         self.address.clear();
         self.method.clear();
-        self.arguments.clear();
+        self.input.clear();
         self.unknown_fields.clear();
     }
 }
@@ -918,7 +947,7 @@ impl ::protobuf::reflect::ProtobufValue for CallRequest {
 #[derive(PartialEq,Clone,Default)]
 pub struct CallResponse {
     // message fields
-    pub output: ::protobuf::SingularPtrField<Value>,
+    pub output: ::protobuf::SingularPtrField<::protobuf::well_known_types::Any>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -935,11 +964,11 @@ impl CallResponse {
         ::std::default::Default::default()
     }
 
-    // .Value output = 1;
+    // .google.protobuf.Any output = 1;
 
 
-    pub fn get_output(&self) -> &Value {
-        self.output.as_ref().unwrap_or_else(|| <Value as ::protobuf::Message>::default_instance())
+    pub fn get_output(&self) -> &::protobuf::well_known_types::Any {
+        self.output.as_ref().unwrap_or_else(|| <::protobuf::well_known_types::Any as ::protobuf::Message>::default_instance())
     }
     pub fn clear_output(&mut self) {
         self.output.clear();
@@ -950,13 +979,13 @@ impl CallResponse {
     }
 
     // Param is passed by value, moved
-    pub fn set_output(&mut self, v: Value) {
+    pub fn set_output(&mut self, v: ::protobuf::well_known_types::Any) {
         self.output = ::protobuf::SingularPtrField::some(v);
     }
 
     // Mutable pointer to the field.
     // If field is not initialized, it is initialized with default value first.
-    pub fn mut_output(&mut self) -> &mut Value {
+    pub fn mut_output(&mut self) -> &mut ::protobuf::well_known_types::Any {
         if self.output.is_none() {
             self.output.set_default();
         }
@@ -964,8 +993,8 @@ impl CallResponse {
     }
 
     // Take field
-    pub fn take_output(&mut self) -> Value {
-        self.output.take().unwrap_or_else(|| Value::new())
+    pub fn take_output(&mut self) -> ::protobuf::well_known_types::Any {
+        self.output.take().unwrap_or_else(|| ::protobuf::well_known_types::Any::new())
     }
 }
 
@@ -1051,7 +1080,7 @@ impl ::protobuf::Message for CallResponse {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Value>>(
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<::protobuf::well_known_types::Any>>(
                 "output",
                 |m: &CallResponse| { &m.output },
                 |m: &mut CallResponse| { &mut m.output },
@@ -1090,21 +1119,18 @@ impl ::protobuf::reflect::ProtobufValue for CallResponse {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x10src/zinctx.proto\"O\n\x05Value\x12\x18\n\x06intval\x18\x01\x20\x01\
-    (\x05H\0R\x06intval\x12\x1e\n\tstringval\x18\x02\x20\x01(\tH\0R\tstringv\
-    alB\x0c\n\nValueOneOf\"\xc2\x01\n\x0cQueryRequest\x12\x18\n\x07address\
-    \x18\x01\x20\x01(\tR\x07address\x12\x16\n\x06method\x18\x02\x20\x01(\tR\
-    \x06method\x12:\n\targuments\x18\x03\x20\x03(\x0b2\x1c.QueryRequest.Argu\
-    mentsEntryR\targuments\x1aD\n\x0eArgumentsEntry\x12\x10\n\x03key\x18\x01\
-    \x20\x01(\tR\x03key\x12\x1c\n\x05value\x18\x02\x20\x01(\x0b2\x06.ValueR\
-    \x05value:\x028\x01\"/\n\rQueryResponse\x12\x1e\n\x06output\x18\x01\x20\
-    \x01(\x0b2\x06.ValueR\x06output\"\xc0\x01\n\x0bCallRequest\x12\x18\n\x07\
-    address\x18\x01\x20\x01(\tR\x07address\x12\x16\n\x06method\x18\x02\x20\
-    \x01(\tR\x06method\x129\n\targuments\x18\x03\x20\x03(\x0b2\x1b.CallReque\
-    st.ArgumentsEntryR\targuments\x1aD\n\x0eArgumentsEntry\x12\x10\n\x03key\
-    \x18\x01\x20\x01(\tR\x03key\x12\x1c\n\x05value\x18\x02\x20\x01(\x0b2\x06\
-    .ValueR\x05value:\x028\x01\".\n\x0cCallResponse\x12\x1e\n\x06output\x18\
-    \x01\x20\x01(\x0b2\x06.ValueR\x06outputB\tZ\x07protos/b\x06proto3\
+    \n\x0czinctx.proto\x12\x06zinctx\x1a\x19google/protobuf/any.proto\x1a\nz\
+    inc.proto\"\\\n\x05Input\x12\x1f\n\x03msg\x18\x01\x20\x01(\x0b2\r.zinc.M\
+    essageR\x03msg\x122\n\targuments\x18\x02\x20\x01(\x0b2\x14.google.protob\
+    uf.AnyR\targuments\"e\n\x0cQueryRequest\x12\x18\n\x07address\x18\x01\x20\
+    \x01(\tR\x07address\x12\x16\n\x06method\x18\x02\x20\x01(\tR\x06method\
+    \x12#\n\x05input\x18\x03\x20\x01(\x0b2\r.zinctx.InputR\x05input\"=\n\rQu\
+    eryResponse\x12,\n\x06output\x18\x01\x20\x01(\x0b2\x14.google.protobuf.A\
+    nyR\x06output\"d\n\x0bCallRequest\x12\x18\n\x07address\x18\x01\x20\x01(\
+    \tR\x07address\x12\x16\n\x06method\x18\x02\x20\x01(\tR\x06method\x12#\n\
+    \x05input\x18\x03\x20\x01(\x0b2\r.zinctx.InputR\x05input\"<\n\x0cCallRes\
+    ponse\x12,\n\x06output\x18\x01\x20\x01(\x0b2\x14.google.protobuf.AnyR\
+    \x06outputB\tZ\x07protos/b\x06proto3\
 ";
 
 static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::rt::LazyV2::INIT;
