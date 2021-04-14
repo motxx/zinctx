@@ -4,13 +4,14 @@ package contracts.example;
 
 import "zinc.proto";
 
-option go_package = "protos/contracts/";
+option go_package = "protos/";
 
 message GetFeeArguments {
 }
 
 message GetFeeOutput {
-  zinc.uint16 fee = 1;
+//  zinc.uint16 fee = 1;
+  uint32 fee = 1;
 }
 
 message DepositArguments {
@@ -20,7 +21,8 @@ message DepositOutput {
 }
 
 message ExchangeArguments {
-  zinc.address withdraw_token = 1;
+//  zinc.address withdraw_token = 1;
+  string withdraw_token = 1;
 }
 
 message ExchangeOutput {

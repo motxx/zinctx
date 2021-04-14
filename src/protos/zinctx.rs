@@ -26,7 +26,7 @@
 #[derive(PartialEq,Clone,Default)]
 pub struct Input {
     // message fields
-    pub msg: ::protobuf::SingularPtrField<super::zinc::Message>,
+    pub msg: ::protobuf::SingularPtrField<super::zinc::Msg>,
     pub arguments: ::protobuf::SingularPtrField<::protobuf::well_known_types::Any>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
@@ -44,11 +44,11 @@ impl Input {
         ::std::default::Default::default()
     }
 
-    // .zinc.Message msg = 1;
+    // .zinc.Msg msg = 1;
 
 
-    pub fn get_msg(&self) -> &super::zinc::Message {
-        self.msg.as_ref().unwrap_or_else(|| <super::zinc::Message as ::protobuf::Message>::default_instance())
+    pub fn get_msg(&self) -> &super::zinc::Msg {
+        self.msg.as_ref().unwrap_or_else(|| <super::zinc::Msg as ::protobuf::Message>::default_instance())
     }
     pub fn clear_msg(&mut self) {
         self.msg.clear();
@@ -59,13 +59,13 @@ impl Input {
     }
 
     // Param is passed by value, moved
-    pub fn set_msg(&mut self, v: super::zinc::Message) {
+    pub fn set_msg(&mut self, v: super::zinc::Msg) {
         self.msg = ::protobuf::SingularPtrField::some(v);
     }
 
     // Mutable pointer to the field.
     // If field is not initialized, it is initialized with default value first.
-    pub fn mut_msg(&mut self) -> &mut super::zinc::Message {
+    pub fn mut_msg(&mut self) -> &mut super::zinc::Msg {
         if self.msg.is_none() {
             self.msg.set_default();
         }
@@ -73,8 +73,8 @@ impl Input {
     }
 
     // Take field
-    pub fn take_msg(&mut self) -> super::zinc::Message {
-        self.msg.take().unwrap_or_else(|| super::zinc::Message::new())
+    pub fn take_msg(&mut self) -> super::zinc::Msg {
+        self.msg.take().unwrap_or_else(|| super::zinc::Msg::new())
     }
 
     // .google.protobuf.Any arguments = 2;
@@ -210,7 +210,7 @@ impl ::protobuf::Message for Input {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::zinc::Message>>(
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::zinc::Msg>>(
                 "msg",
                 |m: &Input| { &m.msg },
                 |m: &mut Input| { &mut m.msg },
@@ -1120,17 +1120,17 @@ impl ::protobuf::reflect::ProtobufValue for CallResponse {
 
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x0czinctx.proto\x12\x06zinctx\x1a\x19google/protobuf/any.proto\x1a\nz\
-    inc.proto\"\\\n\x05Input\x12\x1f\n\x03msg\x18\x01\x20\x01(\x0b2\r.zinc.M\
-    essageR\x03msg\x122\n\targuments\x18\x02\x20\x01(\x0b2\x14.google.protob\
-    uf.AnyR\targuments\"e\n\x0cQueryRequest\x12\x18\n\x07address\x18\x01\x20\
-    \x01(\tR\x07address\x12\x16\n\x06method\x18\x02\x20\x01(\tR\x06method\
-    \x12#\n\x05input\x18\x03\x20\x01(\x0b2\r.zinctx.InputR\x05input\"=\n\rQu\
-    eryResponse\x12,\n\x06output\x18\x01\x20\x01(\x0b2\x14.google.protobuf.A\
-    nyR\x06output\"d\n\x0bCallRequest\x12\x18\n\x07address\x18\x01\x20\x01(\
+    inc.proto\"X\n\x05Input\x12\x1b\n\x03msg\x18\x01\x20\x01(\x0b2\t.zinc.Ms\
+    gR\x03msg\x122\n\targuments\x18\x02\x20\x01(\x0b2\x14.google.protobuf.An\
+    yR\targuments\"e\n\x0cQueryRequest\x12\x18\n\x07address\x18\x01\x20\x01(\
     \tR\x07address\x12\x16\n\x06method\x18\x02\x20\x01(\tR\x06method\x12#\n\
-    \x05input\x18\x03\x20\x01(\x0b2\r.zinctx.InputR\x05input\"<\n\x0cCallRes\
-    ponse\x12,\n\x06output\x18\x01\x20\x01(\x0b2\x14.google.protobuf.AnyR\
-    \x06outputB\tZ\x07protos/b\x06proto3\
+    \x05input\x18\x03\x20\x01(\x0b2\r.zinctx.InputR\x05input\"=\n\rQueryResp\
+    onse\x12,\n\x06output\x18\x01\x20\x01(\x0b2\x14.google.protobuf.AnyR\x06\
+    output\"d\n\x0bCallRequest\x12\x18\n\x07address\x18\x01\x20\x01(\tR\x07a\
+    ddress\x12\x16\n\x06method\x18\x02\x20\x01(\tR\x06method\x12#\n\x05input\
+    \x18\x03\x20\x01(\x0b2\r.zinctx.InputR\x05input\"<\n\x0cCallResponse\x12\
+    ,\n\x06output\x18\x01\x20\x01(\x0b2\x14.google.protobuf.AnyR\x06outputB\
+    \tZ\x07protos/b\x06proto3\
 ";
 
 static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::rt::LazyV2::INIT;

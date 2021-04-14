@@ -142,7 +142,7 @@ impl ::protobuf::reflect::ProtobufValue for GetFeeArguments {
 #[derive(PartialEq,Clone,Default)]
 pub struct GetFeeOutput {
     // message fields
-    pub fee: ::protobuf::SingularPtrField<super::zinc::uint16>,
+    pub fee: u32,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -159,47 +159,24 @@ impl GetFeeOutput {
         ::std::default::Default::default()
     }
 
-    // .zinc.uint16 fee = 1;
+    // uint32 fee = 1;
 
 
-    pub fn get_fee(&self) -> &super::zinc::uint16 {
-        self.fee.as_ref().unwrap_or_else(|| <super::zinc::uint16 as ::protobuf::Message>::default_instance())
+    pub fn get_fee(&self) -> u32 {
+        self.fee
     }
     pub fn clear_fee(&mut self) {
-        self.fee.clear();
-    }
-
-    pub fn has_fee(&self) -> bool {
-        self.fee.is_some()
+        self.fee = 0;
     }
 
     // Param is passed by value, moved
-    pub fn set_fee(&mut self, v: super::zinc::uint16) {
-        self.fee = ::protobuf::SingularPtrField::some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_fee(&mut self) -> &mut super::zinc::uint16 {
-        if self.fee.is_none() {
-            self.fee.set_default();
-        }
-        self.fee.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_fee(&mut self) -> super::zinc::uint16 {
-        self.fee.take().unwrap_or_else(|| super::zinc::uint16::new())
+    pub fn set_fee(&mut self, v: u32) {
+        self.fee = v;
     }
 }
 
 impl ::protobuf::Message for GetFeeOutput {
     fn is_initialized(&self) -> bool {
-        for v in &self.fee {
-            if !v.is_initialized() {
-                return false;
-            }
-        };
         true
     }
 
@@ -208,7 +185,11 @@ impl ::protobuf::Message for GetFeeOutput {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.fee)?;
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint32()?;
+                    self.fee = tmp;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -222,9 +203,8 @@ impl ::protobuf::Message for GetFeeOutput {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if let Some(ref v) = self.fee.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        if self.fee != 0 {
+            my_size += ::protobuf::rt::value_size(1, self.fee, ::protobuf::wire_format::WireTypeVarint);
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -232,10 +212,8 @@ impl ::protobuf::Message for GetFeeOutput {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
-        if let Some(ref v) = self.fee.as_ref() {
-            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
-            os.write_raw_varint32(v.get_cached_size())?;
-            v.write_to_with_cached_sizes(os)?;
+        if self.fee != 0 {
+            os.write_uint32(1, self.fee)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -275,7 +253,7 @@ impl ::protobuf::Message for GetFeeOutput {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::zinc::uint16>>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint32>(
                 "fee",
                 |m: &GetFeeOutput| { &m.fee },
                 |m: &mut GetFeeOutput| { &mut m.fee },
@@ -296,7 +274,7 @@ impl ::protobuf::Message for GetFeeOutput {
 
 impl ::protobuf::Clear for GetFeeOutput {
     fn clear(&mut self) {
-        self.fee.clear();
+        self.fee = 0;
         self.unknown_fields.clear();
     }
 }
@@ -548,7 +526,7 @@ impl ::protobuf::reflect::ProtobufValue for DepositOutput {
 #[derive(PartialEq,Clone,Default)]
 pub struct ExchangeArguments {
     // message fields
-    pub withdraw_token: ::protobuf::SingularPtrField<super::zinc::address>,
+    pub withdraw_token: ::std::string::String,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -565,47 +543,35 @@ impl ExchangeArguments {
         ::std::default::Default::default()
     }
 
-    // .zinc.address withdraw_token = 1;
+    // string withdraw_token = 1;
 
 
-    pub fn get_withdraw_token(&self) -> &super::zinc::address {
-        self.withdraw_token.as_ref().unwrap_or_else(|| <super::zinc::address as ::protobuf::Message>::default_instance())
+    pub fn get_withdraw_token(&self) -> &str {
+        &self.withdraw_token
     }
     pub fn clear_withdraw_token(&mut self) {
         self.withdraw_token.clear();
     }
 
-    pub fn has_withdraw_token(&self) -> bool {
-        self.withdraw_token.is_some()
-    }
-
     // Param is passed by value, moved
-    pub fn set_withdraw_token(&mut self, v: super::zinc::address) {
-        self.withdraw_token = ::protobuf::SingularPtrField::some(v);
+    pub fn set_withdraw_token(&mut self, v: ::std::string::String) {
+        self.withdraw_token = v;
     }
 
     // Mutable pointer to the field.
     // If field is not initialized, it is initialized with default value first.
-    pub fn mut_withdraw_token(&mut self) -> &mut super::zinc::address {
-        if self.withdraw_token.is_none() {
-            self.withdraw_token.set_default();
-        }
-        self.withdraw_token.as_mut().unwrap()
+    pub fn mut_withdraw_token(&mut self) -> &mut ::std::string::String {
+        &mut self.withdraw_token
     }
 
     // Take field
-    pub fn take_withdraw_token(&mut self) -> super::zinc::address {
-        self.withdraw_token.take().unwrap_or_else(|| super::zinc::address::new())
+    pub fn take_withdraw_token(&mut self) -> ::std::string::String {
+        ::std::mem::replace(&mut self.withdraw_token, ::std::string::String::new())
     }
 }
 
 impl ::protobuf::Message for ExchangeArguments {
     fn is_initialized(&self) -> bool {
-        for v in &self.withdraw_token {
-            if !v.is_initialized() {
-                return false;
-            }
-        };
         true
     }
 
@@ -614,7 +580,7 @@ impl ::protobuf::Message for ExchangeArguments {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.withdraw_token)?;
+                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.withdraw_token)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -628,9 +594,8 @@ impl ::protobuf::Message for ExchangeArguments {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if let Some(ref v) = self.withdraw_token.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        if !self.withdraw_token.is_empty() {
+            my_size += ::protobuf::rt::string_size(1, &self.withdraw_token);
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -638,10 +603,8 @@ impl ::protobuf::Message for ExchangeArguments {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
-        if let Some(ref v) = self.withdraw_token.as_ref() {
-            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
-            os.write_raw_varint32(v.get_cached_size())?;
-            v.write_to_with_cached_sizes(os)?;
+        if !self.withdraw_token.is_empty() {
+            os.write_string(1, &self.withdraw_token)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -681,7 +644,7 @@ impl ::protobuf::Message for ExchangeArguments {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::zinc::address>>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
                 "withdraw_token",
                 |m: &ExchangeArguments| { &m.withdraw_token },
                 |m: &mut ExchangeArguments| { &mut m.withdraw_token },
@@ -837,11 +800,10 @@ impl ::protobuf::reflect::ProtobufValue for ExchangeOutput {
 
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x17contracts/example.proto\x12\x11contracts.example\x1a\nzinc.proto\"\
-    \x11\n\x0fGetFeeArguments\".\n\x0cGetFeeOutput\x12\x1e\n\x03fee\x18\x01\
-    \x20\x01(\x0b2\x0c.zinc.uint16R\x03fee\"\x12\n\x10DepositArguments\"\x0f\
-    \n\rDepositOutput\"I\n\x11ExchangeArguments\x124\n\x0ewithdraw_token\x18\
-    \x01\x20\x01(\x0b2\r.zinc.addressR\rwithdrawToken\"\x10\n\x0eExchangeOut\
-    putB\x13Z\x11protos/contracts/b\x06proto3\
+    \x11\n\x0fGetFeeArguments\"\x20\n\x0cGetFeeOutput\x12\x10\n\x03fee\x18\
+    \x01\x20\x01(\rR\x03fee\"\x12\n\x10DepositArguments\"\x0f\n\rDepositOutp\
+    ut\":\n\x11ExchangeArguments\x12%\n\x0ewithdraw_token\x18\x01\x20\x01(\t\
+    R\rwithdrawToken\"\x10\n\x0eExchangeOutputB\tZ\x07protos/b\x06proto3\
 ";
 
 static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::rt::LazyV2::INIT;
