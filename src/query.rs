@@ -5,12 +5,6 @@ use protobuf::Message;
 use crate::protos::zinctx::{QueryRequest, QueryResponse};
 use std::ffi::{CStr, CString};
 
-// TODO: コントラクト別の実装は隠蔽
-// TODO: exampleをcontracts配下にする
-use crate::protos::example::GetFeeOutput;
-use protobuf::well_known_types::Any;
-use std::io::BufReader;
-
 #[no_mangle]
 pub extern "C" fn ffi_send_query_request(ptr: *const libc::c_char) -> *const libc::c_char {
     let slice = unsafe { CStr::from_ptr(ptr) };
@@ -22,14 +16,35 @@ pub extern "C" fn ffi_send_query_request(ptr: *const libc::c_char) -> *const lib
     p
 }
 
-pub fn send_request(proto: QueryRequest) -> QueryResponse {
-  let mut response = QueryResponse::new();
+// TODO: コントラクト別の実装を隠蔽
+use crate::protos::example::GetFeeOutput;
+use protobuf::well_known_types::Any;
 
-  // TODO: コントラクト別の実装は隠蔽
-  let mut fee = GetFeeOutput::new();
-  fee.set_fee(123);
-  let out = Any::pack(&fee).unwrap();
-  response.set_output(out);
+fn send_request(req: QueryRequest) -> QueryResponse {
+  let mut res = QueryResponse::new();
 
-  response
+  let address = req.get_address();
+  let method = req.get_method();
+  let input = req.get_input();
+
+  let msg = input.get_msg();
+  let args = input.get_arguments();
+
+  match address {
+    "contract-example" => {
+      match method {
+        "get_fee" => {
+          // TODO: Use http client to request to Zandbox server
+          let mut fee = GetFeeOutput::new();
+          fee.set_fee(123);
+          let out = Any::pack(&fee).unwrap();
+          res.set_output(out);
+        },
+        _ => (),
+      }
+    },
+    _ => (),
+  }
+
+  res
 }
