@@ -4,14 +4,14 @@ extern crate protobuf;
 use protobuf::Message;
 use std::ffi::{CStr, CString};
 
-use crate::protos::zinctx::{QueryRequest, QueryResponse};
+use crate::protos::zinctx::{CallRequest, CallResponse};
 
 #[no_mangle]
-pub extern "C" fn ffi_send_query_request(endpoint_url_ptr: *const libc::c_char, proto_ptr: *const libc::c_char) -> *const libc::c_char {
+pub extern "C" fn ffi_send_call_request(endpoint_url_ptr: *const libc::c_char, proto_ptr: *const libc::c_char) -> *const libc::c_char {
     let endpoint_url = unsafe { CStr::from_ptr(endpoint_url_ptr) }.to_str().unwrap();
     let proto_slice = unsafe { CStr::from_ptr(proto_ptr) };
-    let proto = QueryRequest::parse_from_bytes(proto_slice.to_bytes()).unwrap();
-    let res = send_query_request(endpoint_url, proto);
+    let proto = CallRequest::parse_from_bytes(proto_slice.to_bytes()).unwrap();
+    let res = send_call_request(endpoint_url, proto);
     let s = CString::new(res.write_to_bytes().unwrap()).unwrap();
     let p = s.as_ptr();
     std::mem::forget(s);
@@ -24,28 +24,28 @@ use url::Url;
 use serde_json::Value;
 use std::collections::HashMap;
 
-use crate::protos::example::GetFeeOutput;
+use crate::protos::example::DepositOutput;
 
-fn send_query_request(endpoint_url: &str, query_request: QueryRequest) -> QueryResponse {
-  let address = query_request.get_address();
-  let method = query_request.get_method();
-  let input = query_request.get_input();
+fn send_call_request(endpoint_url: &str, call_request: CallRequest) -> CallResponse {
+  let address = call_request.get_address();
+  let method = call_request.get_method();
+  let input = call_request.get_input();
 
   let msg = input.get_msg();
   let args = input.get_arguments();
 
   let url = Url::parse(endpoint_url).unwrap();
-  let url = url.join(&format!("/api/v1/contract/query?address={}&method={}", address, method)).unwrap();
+  let url = url.join(&format!("/api/v1/contract/call?address={}&method={}", address, method)).unwrap();
   let url = url.as_str();
 
-  let mut query_response = QueryResponse::new();
+  let mut call_response = CallResponse::new();
 
   match address {
     // ConstantPrice
     // See: https://zinc.zksync.io/07-smart-contracts/02-minimal-example.html
     "0x1f81df95c5478059e0e85f7594467bbfe511792a" => {
       match method {
-        "get_fee" => {
+        "deposit" => {
           let mut req_http: HashMap<&str, HashMap<&str, &str>> = HashMap::new();
           req_http.insert("arguments", HashMap::new());
 
@@ -66,16 +66,13 @@ fn send_query_request(endpoint_url: &str, query_request: QueryRequest) -> QueryR
             let val = res_json.get("output")
               .expect("unexpected response value: not found \"output\" key")
               .as_str()
-              .expect("\"output\" value type is not json str")
-              .parse()
-              .expect("cannot parse as integer");
+              .expect("\"output\" value type is not json str");
 
-            let mut out = GetFeeOutput::new();
-            out.set_fee(val);
+            let out = DepositOutput::new();
             let out = Any::pack(&out)
               .expect("cannot pack output into Any type proto");
 
-            query_response.set_output(out);
+            call_response.set_output(out);
           }
         },
         _ => (),
@@ -84,5 +81,32 @@ fn send_query_request(endpoint_url: &str, query_request: QueryRequest) -> QueryR
     _ => (),
   }
 
-  query_response
+  call_response
 }
+/*
+{
+  "arguments": {
+    "value": "42"
+  },
+  "transaction": {
+    "tx": {
+      "type": "Transfer",
+      "accountId": 1,
+      "from": "0x36615cf349d7f6344891b1e7ca7c72883f5dc049",
+      "to": "0x1234567812345678123456781234567812345678",
+      "token": 0,
+      "amount": "0",
+      "fee": "37500000000000",
+      "nonce": 2,
+      "signature": {
+        "pubKey": "07f86efb9bf58d5ebf23042406cb43e9363879ff79223be05b7feac1dbc58c86",
+        "signature": "042c7356c3970c5ab620e1eaf0a9e39563edc9383072ac33a29398f11678b2a3acdc40ff05acd225b6a71962cfabfa6012fae8492106987bcd48135fefa09c02"
+      }
+    },
+    "ethereumSignature": {
+      "type": "EthereumSignature",
+      "signature": "0xbe7a011c0b03a2ab8eceb3f51ec3055e5998b025e3e41a320f6b00532a4c49604608fe7b9c36d837c36817bbaf5570197484281dd45d83f2d9ef867b7454b91e1b"
+    }
+  }
+}
+*/

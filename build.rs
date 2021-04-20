@@ -11,6 +11,7 @@ fn main() -> Result<(), Box<Error>> {
         out_dir: "src/protos",
         includes: &["src"],
         customize: Customize {
+            serde_derive: Some(true),
             ..Default::default()
         },
     })?;
